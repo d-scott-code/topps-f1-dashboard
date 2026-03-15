@@ -8,6 +8,7 @@ import Dashboard from "./pages/dashboard";
 import ProductCatalog from "./pages/product-catalog";
 import PriceTracker from "./pages/price-tracker";
 import Watchlist from "./pages/watchlist";
+import DealsListings from "./pages/deals-listings";
 import UpcomingReleases from "./pages/upcoming-releases";
 import VintageFinds from "./pages/vintage-finds";
 import NotFound from "./pages/not-found";
@@ -24,6 +25,7 @@ function AppLayout() {
     { href: "/upcoming", label: "Upcoming Releases", icon: "calendar" },
     { href: "/vintage", label: "2020 Vintage Finds", icon: "gem" },
     { href: "/watchlist", label: "Watchlist", icon: "eye" },
+    { href: "/deals", label: "Deals & Listings", icon: "tag" },
   ];
 
   const iconMap: Record<string, JSX.Element> = {
@@ -44,6 +46,9 @@ function AppLayout() {
     ),
     eye: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    ),
+    tag: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
     ),
   };
 
@@ -121,6 +126,7 @@ function AppLayout() {
           <Route path="/upcoming" component={UpcomingReleases} />
           <Route path="/vintage" component={VintageFinds} />
           <Route path="/watchlist" component={Watchlist} />
+          <Route path="/deals" component={DealsListings} />
           <Route component={NotFound} />
         </Switch>
         <div className="px-6 pb-4">
