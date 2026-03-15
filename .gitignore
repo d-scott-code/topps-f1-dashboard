@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.log
+skills/
+attached_assets/
+tool_calls/
