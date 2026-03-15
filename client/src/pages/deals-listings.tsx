@@ -8,6 +8,10 @@ import {
   getPremiumSingles,
   getInStockBoxes,
   getWatchList,
+  getCaseDealsInStock,
+  getCaseDealsWatchlist,
+  getDynastyInStock,
+  getDynastyWatchlist,
   getPctVsMsrp,
   retailerLinks,
 } from "@/lib/deals-data";
@@ -204,12 +208,32 @@ function RetailerQuickLinks() {
   );
 }
 
+function CasePriceBreakdown({ deal }: { deal: Deal }) {
+  if (deal.category !== 'case' || !deal.price) return null;
+  const isChrome = deal.product.toLowerCase().includes('chrome');
+  const isDynasty = deal.product.toLowerCase().includes('dynasty');
+  const boxCount = isChrome ? 12 : isDynasty ? 5 : 1;
+  if (boxCount <= 1) return null;
+  const perBox = Math.round(deal.price / boxCount);
+  return (
+    <div className="mt-1 flex items-center gap-2">
+      <Badge variant="outline" className="text-[10px] text-primary border-primary/30">
+        {boxCount} boxes = ${perBox}/box
+      </Badge>
+    </div>
+  );
+}
+
 export default function DealsListings() {
   const hotDeals = getHotDeals();
   const belowMsrp = getBelowMsrpDeals();
   const premiumSingles = getPremiumSingles();
   const inStockBoxes = getInStockBoxes();
   const watchList = getWatchList();
+  const casesInStock = getCaseDealsInStock();
+  const casesWatch = getCaseDealsWatchlist();
+  const dynastyInStock = getDynastyInStock();
+  const dynastyWatch = getDynastyWatchlist();
 
   return (
     <div className="p-6 space-y-6">
@@ -220,7 +244,7 @@ export default function DealsListings() {
             Deals & Listings
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Curated deals on Topps F1 sealed boxes, singles, and where to buy
+            Curated deals on Topps F1 sealed boxes, cases, singles, and where to buy
           </p>
         </div>
         <Badge variant="outline" className="text-[10px] text-muted-foreground shrink-0">
@@ -229,7 +253,7 @@ export default function DealsListings() {
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-3">
         <Card>
           <CardContent className="py-3 px-4">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Hot Deals</p>
@@ -240,6 +264,18 @@ export default function DealsListings() {
           <CardContent className="py-3 px-4">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Below MSRP</p>
             <p className="text-lg font-bold text-blue-400 tabular-nums">{belowMsrp.length}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 px-4">
+            <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Cases</p>
+            <p className="text-lg font-bold text-orange-400 tabular-nums">{casesInStock.length}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 px-4">
+            <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Dynasty 2025</p>
+            <p className="text-lg font-bold text-yellow-400 tabular-nums">{dynastyInStock.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -269,6 +305,131 @@ export default function DealsListings() {
         deals={hotDeals}
         accentColor="bg-emerald-500"
       />
+
+      {/* Cases Section */}
+      {casesInStock.length > 0 && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-6 rounded-full bg-orange-500" />
+            <div>
+              <h2 className="text-base font-bold text-foreground">2025 Chrome F1 — Full Cases (12 boxes)</h2>
+              <p className="text-xs text-muted-foreground">Buy a full case for the best per-box price. MSRP $250/box = $3,000/case</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {casesInStock.map((deal) => (
+              <Card key={deal.id} className="flex flex-col justify-between">
+                <CardContent className="pt-4 pb-3 px-4 space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-sm font-semibold text-foreground leading-tight">
+                      {deal.seller}
+                    </h3>
+                    <AvailabilityBadge deal={deal} />
+                  </div>
+                  <div className="space-y-0.5">
+                    <p className="text-lg font-bold tabular-nums text-foreground">
+                      {deal.priceDisplay}
+                    </p>
+                    <CasePriceBreakdown deal={deal} />
+                  </div>
+                  {deal.notes && (
+                    <p className="text-[11px] text-muted-foreground/70 leading-relaxed">
+                      {deal.notes}
+                    </p>
+                  )}
+                </CardContent>
+                <div className="px-4 pb-4">
+                  <a href={deal.url} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" className="w-full" data-testid={`case-deal-${deal.id}`}>
+                      View Listing
+                    </Button>
+                  </a>
+                </div>
+              </Card>
+            ))}
+          </div>
+          {casesWatch.length > 0 && (
+            <div className="mt-2">
+              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Sold Out — Watch for Restocks</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+                {casesWatch.map((deal) => (
+                  <a key={deal.id} href={deal.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-md border border-border hover:border-primary/30 transition-colors group">
+                    <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground group-hover:text-primary truncate">{deal.seller}</p>
+                      <p className="text-[10px] text-muted-foreground/60">{deal.notes}</p>
+                    </div>
+                    <span className="text-[10px] text-primary shrink-0">Monitor ↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Dynasty 2025 Section */}
+      {(dynastyInStock.length > 0 || dynastyWatch.length > 0) && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-6 rounded-full bg-yellow-500" />
+            <div>
+              <h2 className="text-base font-bold text-foreground">2025 Dynasty F1 — Boxes & Cases</h2>
+              <p className="text-xs text-muted-foreground">Buy multiple boxes from the same seller. MSRP $1,200/box. Cases are 5 boxes.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {dynastyInStock.map((deal) => (
+              <Card key={deal.id} className="flex flex-col justify-between">
+                <CardContent className="pt-4 pb-3 px-4 space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-sm font-semibold text-foreground leading-tight">
+                      {deal.product}
+                    </h3>
+                    <AvailabilityBadge deal={deal} />
+                  </div>
+                  <div className="space-y-0.5">
+                    <p className="text-lg font-bold tabular-nums text-foreground">
+                      {deal.priceDisplay}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{deal.seller}</p>
+                    <CasePriceBreakdown deal={deal} />
+                  </div>
+                  {deal.notes && (
+                    <p className="text-[11px] text-muted-foreground/70 leading-relaxed">
+                      {deal.notes}
+                    </p>
+                  )}
+                </CardContent>
+                <div className="px-4 pb-4">
+                  <a href={deal.url} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" className="w-full" data-testid={`dynasty-deal-${deal.id}`}>
+                      View Listing
+                    </Button>
+                  </a>
+                </div>
+              </Card>
+            ))}
+          </div>
+          {dynastyWatch.length > 0 && (
+            <div className="mt-2">
+              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Sold Out — Watch for Restocks</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+                {dynastyWatch.map((deal) => (
+                  <a key={deal.id} href={deal.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-md border border-border hover:border-primary/30 transition-colors group">
+                    <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground group-hover:text-primary truncate">{deal.product} — {deal.seller}</p>
+                      <p className="text-[10px] text-muted-foreground/60">{deal.notes}</p>
+                    </div>
+                    <span className="text-[10px] text-primary shrink-0">Monitor ↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       <DealSection
         title="Below MSRP Opportunities"

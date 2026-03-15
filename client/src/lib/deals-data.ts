@@ -23,15 +23,15 @@ export const deals: Deal[] = [
     id: 1,
     product: '2025 Topps Chrome F1 Hobby Box',
     year: 2025,
-    price: 299.95,
-    priceDisplay: '$299.95',
+    price: 349.95,
+    priceDisplay: '$349.95',
     msrp: 250,
     seller: 'Steel City Collectibles',
     url: 'https://www.steelcitycollectibles.com/i/2025-topps-chrome-formula-1-f1-racing-hobby-box',
     listingType: 'buy_now',
     availability: 'in_stock',
     category: 'sealed_box',
-    notes: 'Sale from $449.95 to $299.95 — lowest confirmed US price. Free shipping over $199.',
+    notes: 'Sale from $449.95 — competitive with major retailers. Free shipping over $199.',
     source: 'Steel City Collectibles',
     highlight: 'hot_deal',
     dateFound: '2026-03-14',
@@ -48,7 +48,7 @@ export const deals: Deal[] = [
     listingType: 'buy_now',
     availability: 'in_stock',
     category: 'sealed_box',
-    notes: 'Sale from $399.95. Free shipping over $299. Same-day shipping before 3 PM EST.',
+    notes: 'Sale from $399.95. Includes special 75th Anniversary pack (21 total). Free shipping over $299.',
     source: 'Blowout Cards',
     highlight: 'hot_deal',
     dateFound: '2026-03-14',
@@ -65,7 +65,7 @@ export const deals: Deal[] = [
     listingType: 'buy_now',
     availability: 'in_stock',
     category: 'sealed_box',
-    notes: '$25 OFF coupon with email sign-up (effectively $324.95). Free shipping over $199.',
+    notes: 'Current market price. Free shipping over $199. Check for $25 off coupon for new sign-ups.',
     source: "Dave & Adam's",
     highlight: 'hot_deal',
     dateFound: '2026-03-14',
@@ -179,16 +179,16 @@ export const deals: Deal[] = [
     id: 10,
     product: '2025 Topps Lights Out F1 Hobby Box',
     year: 2025,
-    price: 261,
-    priceDisplay: '$261.00',
+    price: 309.95,
+    priceDisplay: '$309.95',
     msrp: 560,
-    seller: 'StockX',
-    url: 'https://stockx.com/2025-topps-formula-1-lights-out-hobby-box',
+    seller: "Dave & Adam's Card World",
+    url: 'https://www.dacardworld.com/sports-cards/2025-topps-lights-out-formula-1-f1-box',
     listingType: 'buy_now',
-    availability: 'unknown',
+    availability: 'in_stock',
     category: 'sealed_box',
-    notes: 'Last sale $261 — 53% below MSRP. No current asks. Check back for new listings.',
-    source: 'StockX',
+    notes: 'Significant discount from $560 MSRP. UK Fanatics exclusive originally. Now available via US major retail.',
+    source: "Dave & Adam's",
     highlight: 'below_msrp',
     dateFound: '2026-03-14',
   },
@@ -196,16 +196,16 @@ export const deals: Deal[] = [
     id: 11,
     product: '2024 Topps Chrome F1 Hobby Box',
     year: 2024,
-    price: 215,
-    priceDisplay: '$180–$230 (eBay BIN)',
+    price: 180,
+    priceDisplay: '$180 (LCS / eBay BIN)',
     msrp: 240,
-    seller: 'eBay (various sellers)',
+    seller: 'eBay / Local Card Shops',
     url: 'https://www.ebay.com/sch/i.html?_nkw=2024+topps+chrome+formula+1+hobby+box+sealed&LH_BIN=1&LH_ItemCondition=1000&_sop=15',
     listingType: 'buy_now',
     availability: 'in_stock',
     category: 'sealed_box',
-    notes: 'Secondary market below MSRP. Last confirmed sale $215. BIN range ~$180–$230.',
-    source: 'eBay / SportsCardsPro',
+    notes: 'Significant drop from $240 launch price. Available at many local card shops and eBay for $180. Solid value buy.',
+    source: 'Reddit / eBay',
     highlight: 'below_msrp',
     dateFound: '2026-03-14',
   },
@@ -275,7 +275,7 @@ export const deals: Deal[] = [
     listingType: 'buy_now',
     availability: 'in_stock',
     category: 'sealed_box',
-    notes: '12 packs, 8 cards per pack. Features Verstappen, Hamilton, Leclerc. Released Nov 22, 2024.',
+    notes: 'In stock but priced significantly above current eBay market ($180). Includes 12 packs, 8 cards/pack.',
     source: 'Blowout Cards',
     highlight: null,
     dateFound: '2026-03-14',
@@ -712,6 +712,284 @@ export const deals: Deal[] = [
     dateFound: '2026-03-14',
   },
 
+  // ── CASES & MULTI-BOX DEALS ────────────────────────────────────────
+
+  {
+    id: 50,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4150,
+    priceDisplay: '$4,149.95',
+    msrp: 3000,
+    seller: 'Blowout Cards',
+    url: 'https://www.blowoutcards.com/2025-topps-chrome-formula-1-racing-hobby-12-box-case.html',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Sale from $4,799.95 — save $650. 12 boxes = ~$346/box. Free shipping over $299. Best confirmed case price.',
+    source: 'Blowout Cards',
+    highlight: 'hot_deal',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 51,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4197,
+    priceDisplay: '$4,197.00',
+    msrp: 3000,
+    seller: 'RbiCru7 Collectibles',
+    url: 'https://rbicru7.com/products/2025-topps-chrome-formula-1-racing-hobby-12-box-case',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Only 1 available. 12 boxes = ~$350/box. Competitive with Blowout.',
+    source: 'RbiCru7 Collectibles',
+    highlight: 'hot_deal',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 52,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4200,
+    priceDisplay: '$4,200.00',
+    msrp: 3000,
+    seller: 'eBay (casecentral25)',
+    url: 'https://www.ebay.com/itm/188095129188',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Last one. Accepts Best Offer — may go lower. 12 boxes = $350/box before any offer.',
+    source: 'eBay',
+    highlight: 'hot_deal',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 53,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4380,
+    priceDisplay: '$4,379.95',
+    msrp: 3000,
+    seller: 'eBay (blowoutcards)',
+    url: 'https://www.ebay.com/itm/206051349740',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Official Blowout Cards eBay store. 12 boxes = ~$365/box.',
+    source: 'eBay',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 54,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4428,
+    priceDisplay: '$4,428.00',
+    msrp: 3000,
+    seller: 'eBay (joshodeezy)',
+    url: 'https://www.ebay.com/itm/236597991475',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Ripped live option available. 12 boxes = ~$369/box.',
+    source: 'eBay',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 55,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4568,
+    priceDisplay: '$4,567.95',
+    msrp: 3000,
+    seller: 'eBay (midwestcards)',
+    url: 'https://www.ebay.com/itm/116996467102',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'case',
+    notes: 'Free returns. 12 boxes = ~$381/box.',
+    source: 'eBay',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 56,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: null,
+    priceDisplay: 'Sold Out',
+    msrp: 3000,
+    seller: 'Steel City Collectibles',
+    url: 'https://www.steelcitycollectibles.com/i/2025-topps-chrome-formula-1-f1-racing-hobby-12-box-case',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'case',
+    notes: 'OOS. 12 boxes per case. Monitor for restock.',
+    source: 'Steel City Collectibles',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 57,
+    product: '2025 Topps Chrome F1 Hobby 12-Box Case',
+    year: 2025,
+    price: 4700,
+    priceDisplay: '$4,699.95',
+    msrp: 3000,
+    seller: 'Giant Sports Cards',
+    url: 'https://www.giantsportscards.com/products/2025-topps-chrome-f1-formula-one-hobby-12-box-case',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'case',
+    notes: 'OOS — email notification available for restock.',
+    source: 'Giant Sports Cards',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+
+  // ── 2025 DYNASTY F1 (Buy Multiple / Single Boxes) ──────────────────
+
+  {
+    id: 60,
+    product: '2025 Topps Dynasty F1 Hobby Box',
+    year: 2025,
+    price: 3100,
+    priceDisplay: '$3,099.95',
+    msrp: 1200,
+    seller: 'Steel City Collectibles',
+    url: 'https://www.steelcitycollectibles.com/i/2025-topps-dynasty-formula-1-f1-racing-hobby-box',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'sealed_box',
+    notes: 'IN STOCK. Financing from $167/mo. PayPal available. Buy multiple boxes here — no quantity limit listed.',
+    source: 'Steel City Collectibles',
+    highlight: 'hot_deal',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 61,
+    product: '2025 Topps Dynasty F1 Hobby Box',
+    year: 2025,
+    price: 3882,
+    priceDisplay: '$3,882.49',
+    msrp: 1200,
+    seller: 'eBay (stargazer3715)',
+    url: 'https://www.ebay.com/itm/267605870708',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'sealed_box',
+    notes: 'New listing. Accepts Best Offer — negotiate down. Ships from UK.',
+    source: 'eBay',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 62,
+    product: '2025 Topps Dynasty F1 Hobby Box',
+    year: 2025,
+    price: 4167,
+    priceDisplay: '$4,167.21',
+    msrp: 1200,
+    seller: 'eBay (the-mall-88)',
+    url: 'https://www.ebay.com/itm/198178396565',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'sealed_box',
+    notes: 'Sealed. Accepts Best Offer. Ships from South Korea.',
+    source: 'eBay',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 63,
+    product: '2025 Topps Dynasty F1 Hobby Box',
+    year: 2025,
+    price: 4554,
+    priceDisplay: '$4,554 (lowest ask)',
+    msrp: 1200,
+    seller: 'StockX',
+    url: 'https://stockx.com/2025-topps-dynasty-f1-formula-1-hobby-box',
+    listingType: 'buy_now',
+    availability: 'in_stock',
+    category: 'sealed_box',
+    notes: 'Only 1 left at this price. Last sale $3,385. Make Offer available.',
+    source: 'StockX',
+    highlight: null,
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 64,
+    product: '2025 Topps Dynasty F1 Hobby 5-Box Case',
+    year: 2025,
+    price: null,
+    priceDisplay: 'Sold Out',
+    msrp: 6000,
+    seller: 'Blowout Cards',
+    url: 'https://www.blowoutcards.com/2025-topps-dynasty-formula-1-racing-hobby-5-box-case-27270.html',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'case',
+    notes: '5-box case — best value for multi-box Dynasty. All sold out. Monitor for restock.',
+    source: 'Blowout Cards',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 65,
+    product: '2025 Topps Dynasty F1 Hobby 5-Box Case',
+    year: 2025,
+    price: null,
+    priceDisplay: 'Sold Out',
+    msrp: 6000,
+    seller: 'Steel City Collectibles',
+    url: 'https://www.steelcitycollectibles.com/i/2025-topps-dynasty-formula-1-f1-racing-hobby-5-box-case',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'case',
+    notes: '5-box case. OOS. Monitor for restock.',
+    source: 'Steel City Collectibles',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 66,
+    product: '2025 Topps Dynasty F1 Hobby 5-Box Case',
+    year: 2025,
+    price: 10000,
+    priceDisplay: '$9,999.95',
+    msrp: 6000,
+    seller: 'Giant Sports Cards',
+    url: 'https://www.giantsportscards.com/products/2025-topps-dynasty-formula-1-hobby-5-box-case',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'case',
+    notes: 'Was $9,999.95 (was $10,999.95). OOS — email notification available.',
+    source: 'Giant Sports Cards',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+  {
+    id: 67,
+    product: '2025 Topps Dynasty F1 Hobby Box',
+    year: 2025,
+    price: null,
+    priceDisplay: 'Sold Out',
+    msrp: 1200,
+    seller: 'Blowout Cards',
+    url: 'https://www.blowoutcards.com/2025-topps-dynasty-formula-1-racing-hobby-box.html',
+    listingType: 'sold_out',
+    availability: 'sold_out',
+    category: 'sealed_box',
+    notes: 'Single box OOS. Monitor for restock.',
+    source: 'Blowout Cards',
+    highlight: 'watch',
+    dateFound: '2026-03-14',
+  },
+
   // ── REFERENCE PRICING ──────────────────────────────────────────────
 
   {
@@ -874,6 +1152,36 @@ export function getWatchList(): Deal[] {
   );
 }
 
+export function getCaseDeals(): Deal[] {
+  return deals.filter((d) => d.category === 'case');
+}
+
+export function getCaseDealsInStock(): Deal[] {
+  return deals.filter((d) => d.category === 'case' && d.availability === 'in_stock').sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
+}
+
+export function getCaseDealsWatchlist(): Deal[] {
+  return deals.filter((d) => d.category === 'case' && d.availability === 'sold_out');
+}
+
+export function getDynastyDeals(): Deal[] {
+  return deals.filter(
+    (d) => d.product.toLowerCase().includes('dynasty') && d.year === 2025
+  ).sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
+}
+
+export function getDynastyInStock(): Deal[] {
+  return deals.filter(
+    (d) => d.product.toLowerCase().includes('dynasty') && d.year === 2025 && d.availability === 'in_stock'
+  ).sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
+}
+
+export function getDynastyWatchlist(): Deal[] {
+  return deals.filter(
+    (d) => d.product.toLowerCase().includes('dynasty') && d.year === 2025 && d.availability === 'sold_out'
+  );
+}
+
 export function getReferenceDeals(): Deal[] {
   return deals.filter(
     (d) =>
@@ -881,4 +1189,47 @@ export function getReferenceDeals(): Deal[] {
       d.availability !== 'in_stock' &&
       d.category === 'sealed_box'
   );
+}
+
+// Find best available deal for a product (by year + productType match)
+export function findBestDeal(year: number, productType: string): Deal | null {
+  const normalizedType = productType.toLowerCase();
+  const matching = deals.filter(d => {
+    const dProduct = d.product.toLowerCase();
+    return d.year === year
+      && d.availability === 'in_stock'
+      && d.price !== null
+      && (
+        (normalizedType === 'chrome' && dProduct.includes('chrome') && !dProduct.includes('sapphire') && !dProduct.includes('logofractor'))
+        || (normalizedType === 'sapphire' && dProduct.includes('sapphire'))
+        || (normalizedType === 'dynasty' && dProduct.includes('dynasty'))
+        || (normalizedType === 'finest' && dProduct.includes('finest'))
+        || (normalizedType === 'logofractor' && dProduct.includes('logofractor'))
+        || (normalizedType === 'lights out' && dProduct.includes('lights out'))
+        || (normalizedType === 'paddock pass' && dProduct.includes('paddock'))
+      );
+  });
+  if (matching.length === 0) return null;
+  return matching.sort((a, b) => (a.price || Infinity) - (b.price || Infinity))[0];
+}
+
+// Find ALL deals for a product (for watchlist detail)
+export function findAllDeals(year: number, productType: string, format?: string): Deal[] {
+  const normalizedType = productType.toLowerCase();
+  return deals.filter(d => {
+    const dProduct = d.product.toLowerCase();
+    const yearMatch = d.year === year;
+    const typeMatch = (
+      (normalizedType === 'chrome' && dProduct.includes('chrome') && !dProduct.includes('sapphire') && !dProduct.includes('logofractor'))
+      || (normalizedType === 'sapphire' && dProduct.includes('sapphire'))
+      || (normalizedType === 'dynasty' && dProduct.includes('dynasty'))
+      || (normalizedType === 'finest' && dProduct.includes('finest'))
+      || (normalizedType === 'logofractor' && dProduct.includes('logofractor'))
+      || (normalizedType === 'lights out' && dProduct.includes('lights out'))
+      || (normalizedType === 'paddock pass' && dProduct.includes('paddock'))
+    );
+    // If format is specified (e.g. "Hobby Box"), match against deal product text
+    const fmtMatch = !format || dProduct.includes(format.toLowerCase().replace(' box', ''));
+    return yearMatch && typeMatch && fmtMatch;
+  }).sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
 }
