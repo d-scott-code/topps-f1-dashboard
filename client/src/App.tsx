@@ -3,7 +3,8 @@ import { useHashLocation } from "wouter/use-hash-location";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Dashboard from "./pages/dashboard";
 import ProductCatalog from "./pages/product-catalog";
 import PriceTracker from "./pages/price-tracker";
@@ -16,7 +17,22 @@ import { PerplexityAttribution } from "./components/PerplexityAttribution";
 
 function AppLayout() {
   const [location] = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isMobile = useIsMobile();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  // Close mobile drawer on navigation
+  useEffect(() => {
+    if (isMobile) setSidebarOpen(false);
+  }, [location, isMobile]);
+
+  // Close mobile drawer on Escape key
+  useEffect(() => {
+    if (!isMobile || !sidebarOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setSidebarOpen(false); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [isMobile, sidebarOpen]);
 
   const navItems = [
     { href: "/", label: "Overview", icon: "grid" },
@@ -52,73 +68,138 @@ function AppLayout() {
     ),
   };
 
-  return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      {/* Sidebar */}
-      <aside
-        className={`${sidebarOpen ? "w-60" : "w-16"} flex-shrink-0 border-r border-border bg-card transition-all duration-200 flex flex-col`}
-      >
-        {/* Logo */}
-        <div className="flex items-center gap-3 px-4 h-14 border-b border-border flex-shrink-0">
-          <div className="flex-shrink-0">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="Topps F1 Tracker">
-              <rect x="2" y="2" width="28" height="28" rx="6" className="fill-primary"/>
-              <path d="M9 10h14v3H18v9h-4v-9H9v-3z" className="fill-primary-foreground"/>
-              <circle cx="24" cy="22" r="4" className="fill-destructive" opacity="0.9"/>
-              <text x="24" y="24.5" textAnchor="middle" fontSize="6" fontWeight="bold" className="fill-white">1</text>
-            </svg>
-          </div>
-          {sidebarOpen && (
-            <div className="flex flex-col leading-tight">
-              <span className="font-semibold text-sm text-foreground">Topps F1</span>
-              <span className="text-xs text-muted-foreground">Price Tracker</span>
-            </div>
-          )}
+  const showSidebarLabels = isMobile ? true : !sidebarCollapsed;
+  const sidebarWidth = isMobile ? "w-64" : (sidebarCollapsed ? "w-16" : "w-60");
+
+  const sidebarContent = (
+    <>
+      {/* Logo */}
+      <div className="flex items-center gap-3 px-4 h-14 border-b border-border flex-shrink-0">
+        <div className="flex-shrink-0">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="Topps F1 Tracker">
+            <rect x="2" y="2" width="28" height="28" rx="6" className="fill-primary"/>
+            <path d="M9 10h14v3H18v9h-4v-9H9v-3z" className="fill-primary-foreground"/>
+            <circle cx="24" cy="22" r="4" className="fill-destructive" opacity="0.9"/>
+            <text x="24" y="24.5" textAnchor="middle" fontSize="6" fontWeight="bold" className="fill-white">1</text>
+          </svg>
         </div>
+        {showSidebarLabels && (
+          <div className="flex flex-col leading-tight">
+            <span className="font-semibold text-sm text-foreground">Topps F1</span>
+            <span className="text-xs text-muted-foreground">Price Tracker</span>
+          </div>
+        )}
+        {/* Close button on mobile */}
+        {isMobile && (
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="ml-auto p-1 text-muted-foreground hover:text-foreground"
+            data-testid="button-close-sidebar"
+            aria-label="Close menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        )}
+      </div>
 
-        {/* Nav */}
-        <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-          {navItems.map((item) => {
-            const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
-            return (
-              <Link key={item.href} href={item.href}>
-                <div
-                  data-testid={`nav-${item.icon}`}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm cursor-pointer transition-colors ${
-                    isActive
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
-                  <span className="flex-shrink-0">{iconMap[item.icon]}</span>
-                  {sidebarOpen && <span>{item.label}</span>}
-                </div>
-              </Link>
-            );
-          })}
-        </nav>
+      {/* Nav */}
+      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+        {navItems.map((item) => {
+          const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
+          return (
+            <Link key={item.href} href={item.href}>
+              <div
+                data-testid={`nav-${item.icon}`}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm cursor-pointer transition-colors ${
+                  isActive
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+              >
+                <span className="flex-shrink-0">{iconMap[item.icon]}</span>
+                {showSidebarLabels && <span>{item.label}</span>}
+              </div>
+            </Link>
+          );
+        })}
+      </nav>
 
-        {/* Toggle */}
+      {/* Collapse toggle — desktop only */}
+      {!isMobile && (
         <div className="border-t border-border px-2 py-2 flex-shrink-0">
           <button
             data-testid="button-toggle-sidebar"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
             className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-muted hover:text-foreground w-full"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {sidebarOpen ? (
+              {!sidebarCollapsed ? (
                 <><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></>
               ) : (
                 <><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></>
               )}
             </svg>
-            {sidebarOpen && <span>Collapse</span>}
+            {showSidebarLabels && <span>Collapse</span>}
           </button>
         </div>
-      </aside>
+      )}
+    </>
+  );
 
-      {/* Main */}
-      <main className="flex-1 overflow-y-auto">
+  return (
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Mobile: top header bar with hamburger */}
+      {isMobile && (
+        <div className="fixed top-0 left-0 right-0 z-40 h-12 bg-card border-b border-border flex items-center px-3 gap-3">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-1.5 text-muted-foreground hover:text-foreground rounded-md hover:bg-muted"
+            data-testid="button-open-sidebar"
+            aria-label="Open menu"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-label="Topps F1">
+            <rect x="2" y="2" width="28" height="28" rx="6" className="fill-primary"/>
+            <path d="M9 10h14v3H18v9h-4v-9H9v-3z" className="fill-primary-foreground"/>
+            <circle cx="24" cy="22" r="4" className="fill-destructive" opacity="0.9"/>
+            <text x="24" y="24.5" textAnchor="middle" fontSize="6" fontWeight="bold" className="fill-white">1</text>
+          </svg>
+          <span className="font-semibold text-sm text-foreground">Topps F1</span>
+          <span className="text-xs text-muted-foreground hidden min-[420px]:inline">Price Tracker</span>
+        </div>
+      )}
+
+      {/* Mobile: overlay backdrop */}
+      {isMobile && sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          onClick={() => setSidebarOpen(false)}
+          data-testid="sidebar-backdrop"
+        />
+      )}
+
+      {/* Sidebar */}
+      {isMobile ? (
+        <aside
+          className={`fixed top-0 left-0 bottom-0 z-50 ${sidebarWidth} bg-card border-r border-border flex flex-col transition-transform duration-200 ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          {sidebarContent}
+        </aside>
+      ) : (
+        <aside
+          className={`${sidebarWidth} flex-shrink-0 border-r border-border bg-card transition-all duration-200 flex flex-col`}
+        >
+          {sidebarContent}
+        </aside>
+      )}
+
+      {/* Main content */}
+      <main className={`flex-1 overflow-y-auto ${isMobile ? "pt-12" : ""}`}>
         <Switch>
           <Route path="/" component={Dashboard} />
           <Route path="/catalog" component={ProductCatalog} />
@@ -129,7 +210,7 @@ function AppLayout() {
           <Route path="/deals" component={DealsListings} />
           <Route component={NotFound} />
         </Switch>
-        <div className="px-6 pb-4">
+        <div className="px-4 md:px-6 pb-4">
           <PerplexityAttribution />
         </div>
       </main>

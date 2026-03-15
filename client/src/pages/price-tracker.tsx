@@ -55,21 +55,21 @@ export default function PriceTracker() {
     }));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground">Price Tracker</h1>
-        <p className="text-sm text-muted-foreground mt-1">Market pricing trends across all Topps F1 product lines</p>
+        <h1 className="text-lg md:text-xl font-bold text-foreground">Price Tracker</h1>
+        <p className="text-xs md:text-sm text-muted-foreground mt-1">Market pricing trends across all Topps F1 product lines</p>
       </div>
 
       {/* Chrome Hobby Evolution */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold">Chrome Hobby Box — Price History (2020-2025)</CardTitle>
-          <p className="text-xs text-muted-foreground">MSRP vs current market value with high/low range</p>
+          <CardTitle className="text-xs md:text-sm font-semibold">Chrome Hobby — Price History (2020-2025)</CardTitle>
+          <p className="text-[10px] md:text-xs text-muted-foreground">MSRP vs market with high/low range</p>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={chromeHobby} margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
+        <CardContent className="px-2 md:px-6">
+          <ResponsiveContainer width="100%" height={260}>
+            <AreaChart data={chromeHobby} margin={{ top: 10, right: 10, left: -5, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis dataKey="year" fontSize={12} stroke="hsl(var(--muted-foreground))" />
               <YAxis fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `$${v.toLocaleString()}`} />
@@ -87,15 +87,15 @@ export default function PriceTracker() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
         {/* Sapphire Evolution */}
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">Sapphire Hobby — Price History</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-semibold">Sapphire Hobby — Price History</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={sapphireHobby} margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
+          <CardContent className="px-2 md:px-6">
+            <ResponsiveContainer width="100%" height={220}>
+              <LineChart data={sapphireHobby} margin={{ top: 10, right: 10, left: -5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="year" fontSize={12} stroke="hsl(var(--muted-foreground))" />
                 <YAxis fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `$${v.toLocaleString()}`} />
@@ -114,11 +114,11 @@ export default function PriceTracker() {
         {/* Dynasty Evolution */}
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">Dynasty Hobby — Price History</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-semibold">Dynasty Hobby — Price History</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={dynasty} margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
+          <CardContent className="px-2 md:px-6">
+            <ResponsiveContainer width="100%" height={220}>
+              <LineChart data={dynasty} margin={{ top: 10, right: 10, left: -5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="year" fontSize={12} stroke="hsl(var(--muted-foreground))" />
                 <YAxis fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `$${v.toLocaleString()}`} />
@@ -138,8 +138,8 @@ export default function PriceTracker() {
       {/* 2025 Product Price Ranges */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold">2025 Product Price Ranges</CardTitle>
-          <p className="text-xs text-muted-foreground">Current market, MSRP, and observed high/low</p>
+          <CardTitle className="text-xs md:text-sm font-semibold">2025 Product Price Ranges</CardTitle>
+          <p className="text-[10px] md:text-xs text-muted-foreground">Current market, MSRP, and observed high/low</p>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

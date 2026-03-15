@@ -20,16 +20,16 @@ function KPICard({ title, value, subtitle, trend, color }: {
 }) {
   return (
     <Card className="relative overflow-hidden">
-      <CardContent className="pt-5 pb-4 px-5">
-        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
-        <p className="text-2xl font-bold mt-1 tabular-nums" style={color ? { color } : {}}>{value}</p>
-        <div className="flex items-center gap-2 mt-1">
+      <CardContent className="pt-4 pb-3 px-4">
+        <p className="text-[10px] sm:text-xs font-medium text-muted-foreground uppercase tracking-wider leading-tight">{title}</p>
+        <p className="text-lg sm:text-2xl font-bold mt-1 tabular-nums" style={color ? { color } : {}}>{value}</p>
+        <div className="flex items-center gap-2 mt-0.5">
           {trend && (
-            <span className={`text-xs font-medium ${trend === "up" ? "text-emerald-500" : trend === "down" ? "text-red-400" : "text-muted-foreground"}`}>
+            <span className={`text-[10px] sm:text-xs font-medium ${trend === "up" ? "text-emerald-500" : trend === "down" ? "text-red-400" : "text-muted-foreground"}`}>
               {trend === "up" ? "↑" : trend === "down" ? "↓" : "→"} {subtitle}
             </span>
           )}
-          {!trend && <span className="text-xs text-muted-foreground">{subtitle}</span>}
+          {!trend && <span className="text-[10px] sm:text-xs text-muted-foreground">{subtitle}</span>}
         </div>
       </CardContent>
     </Card>
@@ -85,16 +85,16 @@ export default function Dashboard() {
   const belowMsrpDeals = getBelowMsrpDeals().slice(0, 4);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground">Topps F1 Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">Market overview and pricing intelligence</p>
+        <h1 className="text-lg md:text-xl font-bold text-foreground">Topps F1 Dashboard</h1>
+        <p className="text-xs md:text-sm text-muted-foreground mt-1">Market overview and pricing intelligence</p>
       </div>
 
-      {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* KPIs — 2 cols on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <KPICard
-          title="2025 Products Released"
+          title="2025 Released"
           value={released2025.length.toString()}
           subtitle={`of ${prods.filter(p => p.year === 2025).length} total`}
           trend="up"
@@ -107,41 +107,41 @@ export default function Dashboard() {
           color={avgROI > 0 ? "hsl(142, 71%, 45%)" : undefined}
         />
         <KPICard
-          title="Top Performer (All Time)"
-          value={topPerformer ? `${topPerformer.roi?.toFixed(0)}% ROI` : "-"}
+          title="Top Performer"
+          value={topPerformer ? `${topPerformer.roi?.toFixed(0)}%` : "-"}
           subtitle={topPerformer ? `${topPerformer.year} ${topPerformer.productType}` : ""}
           trend="up"
           color="hsl(142, 71%, 45%)"
         />
         <KPICard
-          title="2020 Chrome Hobby"
+          title="2020 Chrome"
           value="$2,090"
-          subtitle="Last sold Mar 2, 2026"
+          subtitle="Last sold Mar 2"
           trend="up"
           color="hsl(142, 71%, 45%)"
         />
       </div>
 
-      {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Charts Row — stack on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
         {/* Chrome Hobby MSRP vs Market */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">Chrome Hobby: MSRP vs Market Price</CardTitle>
+          <CardHeader className="pb-2 px-4 md:px-6">
+            <CardTitle className="text-xs md:text-sm font-semibold">Chrome Hobby: MSRP vs Market</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={chromeByYear} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+          <CardContent className="px-2 md:px-6">
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={chromeByYear} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="year" fontSize={12} stroke="hsl(var(--muted-foreground))" />
-                <YAxis fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `$${v}`} />
+                <XAxis dataKey="year" fontSize={11} stroke="hsl(var(--muted-foreground))" />
+                <YAxis fontSize={11} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `$${v}`} width={50} />
                 <Tooltip
                   contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: "8px", fontSize: "12px" }}
                   formatter={(value: number) => [`$${value.toLocaleString()}`, ""]}
                 />
-                <Legend wrapperStyle={{ fontSize: "12px" }} />
+                <Legend wrapperStyle={{ fontSize: "11px" }} />
                 <Bar dataKey="msrp" name="MSRP" fill="hsl(var(--muted-foreground))" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="market" name="Market Price" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="market" name="Market" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -149,15 +149,15 @@ export default function Dashboard() {
 
         {/* ROI by Product Type */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">Avg ROI by Product Line</CardTitle>
+          <CardHeader className="pb-2 px-4 md:px-6">
+            <CardTitle className="text-xs md:text-sm font-semibold">Avg ROI by Product Line</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={roiByType} layout="vertical" margin={{ top: 5, right: 20, left: 60, bottom: 5 }}>
+          <CardContent className="px-2 md:px-6">
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={roiByType} layout="vertical" margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" fontSize={12} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `${v}%`} />
-                <YAxis type="category" dataKey="type" fontSize={12} stroke="hsl(var(--muted-foreground))" width={80} />
+                <XAxis type="number" fontSize={11} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => `${v}%`} />
+                <YAxis type="category" dataKey="type" fontSize={11} stroke="hsl(var(--muted-foreground))" width={65} />
                 <Tooltip
                   contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: "8px", fontSize: "12px" }}
                   formatter={(value: number) => [`${value}%`, "Avg ROI"]}
@@ -175,16 +175,16 @@ export default function Dashboard() {
 
       {/* Top Deals Spotlight */}
       <Card>
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-2 px-4 md:px-6">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
+            <CardTitle className="text-xs md:text-sm font-semibold flex items-center gap-2">
               <span className="text-emerald-500">🔥</span> Top Deals Right Now
             </CardTitle>
-            <a href="#/deals" className="text-xs text-primary hover:underline">View all deals →</a>
+            <a href="#/deals" className="text-[10px] md:text-xs text-primary hover:underline">View all →</a>
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+        <CardContent className="px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
             {hotDeals.map(deal => (
               <a
                 key={deal.id}
@@ -201,7 +201,7 @@ export default function Dashboard() {
                     </p>
                     <DealBadge deal={deal} />
                   </div>
-                  <p className="text-lg font-bold tabular-nums text-emerald-500">
+                  <p className="text-base md:text-lg font-bold tabular-nums text-emerald-500">
                     {deal.priceDisplay}
                   </p>
                   <p className="text-[10px] text-muted-foreground">{deal.seller}</p>
@@ -218,24 +218,24 @@ export default function Dashboard() {
         </CardContent>
       </Card>
 
-      {/* Bottom Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Trending Up - with links */}
+      {/* Bottom Section — stack on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
+        {/* Trending Up */}
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
+          <CardHeader className="pb-2 px-4 md:px-6">
+            <CardTitle className="text-xs md:text-sm font-semibold flex items-center gap-2">
               <span className="text-emerald-500">↑</span> Trending Up (2024-2025)
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 md:px-6">
             <div className="space-y-3">
               {trendingUp.map(p => {
                 const bestDeal = findBestDeal(p.year, p.productType);
                 return (
-                  <div key={p.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                  <div key={p.id} className="flex items-center justify-between py-2 border-b border-border last:border-0 gap-3">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium">{p.name}</p>
-                      <p className="text-xs text-muted-foreground">{p.format} · {p.year}</p>
+                      <p className="text-xs md:text-sm font-medium truncate">{p.name}</p>
+                      <p className="text-[10px] md:text-xs text-muted-foreground">{p.format} · {p.year}</p>
                       {bestDeal && (
                         <a
                           href={bestDeal.url}
@@ -244,13 +244,13 @@ export default function Dashboard() {
                           className="inline-flex items-center gap-1 mt-1 text-[10px] text-primary hover:underline"
                           data-testid={`trending-deal-${p.id}`}
                         >
-                          Best price: {bestDeal.priceDisplay} at {bestDeal.seller} ↗
+                          Best: {bestDeal.priceDisplay} at {bestDeal.seller} ↗
                         </a>
                       )}
                     </div>
-                    <div className="text-right flex-shrink-0 ml-3">
-                      <p className="text-sm font-semibold tabular-nums">${p.currentMarket?.toLocaleString()}</p>
-                      <Badge variant="secondary" className="text-emerald-500 text-xs">
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs md:text-sm font-semibold tabular-nums">${p.currentMarket?.toLocaleString()}</p>
+                      <Badge variant="secondary" className="text-emerald-500 text-[10px]">
                         +{p.roi?.toFixed(0)}%
                       </Badge>
                     </div>
@@ -261,28 +261,27 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Below MSRP Deals - with links */}
+        {/* Below MSRP Deals */}
         <Card>
-          <CardHeader className="pb-2">
+          <CardHeader className="pb-2 px-4 md:px-6">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold flex items-center gap-2">
+              <CardTitle className="text-xs md:text-sm font-semibold flex items-center gap-2">
                 <span className="text-amber-500">$</span> Below MSRP Opportunities
               </CardTitle>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 md:px-6">
             <div className="space-y-3">
               {belowMsrp.length === 0 && belowMsrpDeals.length === 0 && (
                 <p className="text-sm text-muted-foreground py-4 text-center">No products currently below MSRP</p>
               )}
-              {/* Show product-level below MSRP with deal links */}
               {belowMsrp.map(p => {
                 const bestDeal = findBestDeal(p.year, p.productType);
                 return (
-                  <div key={p.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                  <div key={p.id} className="flex items-center justify-between py-2 border-b border-border last:border-0 gap-3">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium">{p.name}</p>
-                      <p className="text-xs text-muted-foreground">{p.format} · MSRP: ${p.msrp?.toLocaleString()}</p>
+                      <p className="text-xs md:text-sm font-medium truncate">{p.name}</p>
+                      <p className="text-[10px] md:text-xs text-muted-foreground">{p.format} · MSRP: ${p.msrp?.toLocaleString()}</p>
                       {bestDeal && (
                         <a
                           href={bestDeal.url}
@@ -295,16 +294,16 @@ export default function Dashboard() {
                         </a>
                       )}
                     </div>
-                    <div className="text-right flex-shrink-0 ml-3">
-                      <p className="text-sm font-semibold tabular-nums">${p.currentMarket?.toLocaleString()}</p>
-                      <Badge variant="secondary" className="text-red-400 text-xs">
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs md:text-sm font-semibold tabular-nums">${p.currentMarket?.toLocaleString()}</p>
+                      <Badge variant="secondary" className="text-red-400 text-[10px]">
                         {p.roi?.toFixed(0)}%
                       </Badge>
                     </div>
                   </div>
                 );
               })}
-              {/* Also show deal-sourced below-MSRP items not already in products list */}
+              {/* Deal-sourced below-MSRP items */}
               {belowMsrpDeals
                 .filter(d => !belowMsrp.some(p => p.year === d.year && d.product.toLowerCase().includes(p.productType.toLowerCase())))
                 .slice(0, 3)
@@ -314,16 +313,16 @@ export default function Dashboard() {
                     href={d.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2 border-b border-border last:border-0 group hover:bg-muted/30 -mx-2 px-2 rounded"
+                    className="flex items-center justify-between py-2 border-b border-border last:border-0 group hover:bg-muted/30 -mx-2 px-2 rounded gap-3"
                     data-testid={`msrp-deal-${d.id}`}
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium group-hover:text-primary transition-colors">{d.product}</p>
-                      <p className="text-xs text-muted-foreground">{d.seller}</p>
+                      <p className="text-xs md:text-sm font-medium group-hover:text-primary transition-colors truncate">{d.product}</p>
+                      <p className="text-[10px] md:text-xs text-muted-foreground">{d.seller}</p>
                       <span className="text-[10px] text-primary">View listing ↗</span>
                     </div>
-                    <div className="text-right flex-shrink-0 ml-3">
-                      <p className="text-sm font-semibold tabular-nums text-emerald-500">{d.priceDisplay}</p>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs md:text-sm font-semibold tabular-nums text-emerald-500">{d.priceDisplay}</p>
                       {d.msrp && (
                         <span className="text-[10px] text-muted-foreground">MSRP ${d.msrp.toLocaleString()}</span>
                       )}

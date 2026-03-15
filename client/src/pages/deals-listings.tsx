@@ -236,24 +236,24 @@ export default function DealsListings() {
   const dynastyWatch = getDynastyWatchlist();
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between gap-2">
         <div>
-          <h1 className="text-xl font-bold text-foreground">
+          <h1 className="text-lg md:text-xl font-bold text-foreground">
             Deals & Listings
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">
             Curated deals on Topps F1 sealed boxes, cases, singles, and where to buy
           </p>
         </div>
-        <Badge variant="outline" className="text-[10px] text-muted-foreground shrink-0">
+        <Badge variant="outline" className="text-[10px] text-muted-foreground shrink-0 hidden sm:inline-flex">
           Last updated: Mar 14, 2026
         </Badge>
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-2 md:gap-3">
         <Card>
           <CardContent className="py-3 px-4">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Hot Deals</p>

@@ -106,10 +106,10 @@ export default function UpcomingReleases() {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground">Upcoming Releases</h1>
-        <p className="text-sm text-muted-foreground mt-1">Release calendar and launch tracker for Topps F1 products</p>
+        <h1 className="text-lg md:text-xl font-bold text-foreground">Upcoming Releases</h1>
+        <p className="text-xs md:text-sm text-muted-foreground mt-1">Release calendar and launch tracker for Topps F1 products</p>
       </div>
 
       {/* Timeline */}

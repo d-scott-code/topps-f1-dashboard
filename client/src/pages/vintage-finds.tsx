@@ -79,10 +79,10 @@ const sealedProducts = [
 
 export default function VintageFinds() {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground">2020 Vintage Finds</h1>
-        <p className="text-sm text-muted-foreground mt-1">First-year Topps F1 products — Hobby, Sapphire & Dynasty deep dive</p>
+        <h1 className="text-lg md:text-xl font-bold text-foreground">2020 Vintage Finds</h1>
+        <p className="text-xs md:text-sm text-muted-foreground mt-1">First-year Topps F1 products — Hobby, Sapphire & Dynasty deep dive</p>
       </div>
 
       {/* Sealed Product Charts */}

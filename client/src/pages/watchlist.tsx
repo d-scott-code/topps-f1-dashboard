@@ -236,9 +236,9 @@ function AddWatchlistDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <div
-        className="bg-card border border-border rounded-lg shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col m-4"
+        className="bg-card border border-border rounded-t-xl sm:rounded-lg shadow-2xl w-full sm:max-w-lg max-h-[85vh] sm:max-h-[80vh] flex flex-col sm:m-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -431,12 +431,12 @@ export default function Watchlist() {
   const watchingItems = items.filter(item => !alertItems.includes(item));
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6">
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Watchlist</h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <h1 className="text-lg md:text-xl font-bold text-foreground">Watchlist</h1>
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">
             Track products, set target prices, and see live availability
           </p>
         </div>
