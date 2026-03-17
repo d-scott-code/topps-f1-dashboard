@@ -200,6 +200,15 @@ function AppLayout() {
 
       {/* Main content */}
       <main className={`flex-1 overflow-y-auto ${isMobile ? "pt-12" : ""}`}>
+        {/* Last Updated timestamp */}
+        <div className="px-4 md:px-6 pt-2 pb-0">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground" data-testid="last-updated-timestamp">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Prices verified: March 17, 2026 at 10:30 AM MDT</span>
+          </div>
+        </div>
         <Switch>
           <Route path="/" component={Dashboard} />
           <Route path="/catalog" component={ProductCatalog} />

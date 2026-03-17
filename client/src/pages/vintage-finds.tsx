@@ -40,9 +40,9 @@ const sealedProducts = [
       { date: "2023", price: 900, label: "" },
       { date: "Early 2024", price: 1200, label: "" },
       { date: "Mar 2025", price: 1750, label: "" },
-      { date: "Mar 2026", price: 2090, label: "Last sold" },
+      { date: "Mar 2026", price: 1999, label: "StockX Buy Now" },
     ],
-    current: 2090,
+    current: 1999,
     roi: 1293,
     notes: "First ever Topps Chrome F1 product. Last sold $2,089.98 on Mar 2, 2026. Was $1,750 a year prior (+19.4% YoY). 18 packs, 4 cards/pack. RC class: Hamilton, Verstappen, Norris, Leclerc, Tsunoda, Mazepin, Schumacher.",
   },
@@ -172,7 +172,7 @@ export default function VintageFinds() {
           <ul className="space-y-2 text-xs text-muted-foreground">
             <li className="flex items-start gap-2">
               <span className="text-emerald-500 mt-0.5">•</span>
-              <span>2020 Chrome Hobby boxes have shown steady 20%+ YoY appreciation. Current $2,090 level. Any dip below $1,800 is a strong buy signal.</span>
+              <span>2020 Chrome Hobby boxes have shown steady 20%+ YoY appreciation. StockX Buy Now $1,999, last sale $1,997. Any dip below $1,800 is a strong buy signal.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-emerald-500 mt-0.5">•</span>

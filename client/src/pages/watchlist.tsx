@@ -31,7 +31,7 @@ const DEFAULT_WATCH_ITEMS: WatchItem[] = [
     format: "Hobby Box",
     targetPrice: 1800,
     msrp: 150,
-    currentMarket: 2090,
+    currentMarket: 1999,
     notes: "First-ever Chrome F1. Wait for dip below $1,800.",
     addedAt: Date.now() - 86400000 * 10,
   },

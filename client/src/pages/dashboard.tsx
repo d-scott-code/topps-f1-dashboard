@@ -115,8 +115,8 @@ export default function Dashboard() {
         />
         <KPICard
           title="2020 Chrome"
-          value="$2,090"
-          subtitle="Last sold Mar 2"
+          value="$1,999"
+          subtitle="StockX Buy Now"
           trend="up"
           color="hsl(142, 71%, 45%)"
         />
